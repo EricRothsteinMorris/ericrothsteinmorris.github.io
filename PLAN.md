@@ -24,6 +24,8 @@ instructions, shared settings, and checks that run on every change.
 - Start from the `basic-blog` template (verso-templates v4.34.0).
 - Deploy the unchanged template as a working prototype (M2) before
   writing content.
+- Until launch (M8), every merge to `main` deploys unfinished pages. That
+  is acceptable: I don't expect anyone to look at the site before then.
 
 ## Milestones
 
@@ -53,7 +55,8 @@ instructions, shared settings, and checks that run on every change.
 - [ ] **M4. Content.** Write About and Research (projects, plus publications
   with DOI links), reusing the old About text. Link the CV and LinkedIn.
   *Done when:* all text is in place.
-- [ ] **M5. Design.** Theme and CSS.
+- [ ] **M5. Design.** Theme and CSS, including the navigation decided in
+  M3: a home link, and links to the CV and LinkedIn.
   *Done when:* the site looks finished on desktop and phone.
 - [ ] **M6. First Lean post.** Port "On Generalising Algorithms", with the
   definitions and `#eval` examples written in Lean.

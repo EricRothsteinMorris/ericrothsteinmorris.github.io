@@ -14,8 +14,7 @@
     ],
     "deny": [
       "Edit(/private/**)",
-      "Edit(/.lake/**)",
-      "Edit(/_site/**)"
+      "Edit(/.lake/**)"
     ]
   }
 }
