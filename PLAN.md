@@ -52,7 +52,7 @@ instructions, shared settings, and checks that run on every change.
   `LICENSE`. Posts mix Apache-licensed code with reserved prose, so a notice
   at the top of a post would misstate what it covers.
   *Done when:* all pages exist (empty) and the site builds.
-- [ ] **M4. Content.** Write About and Research (publications with DOI
+- [x] **M4. Content.** Write About and Research (publications with DOI
   links), with the text taken from my CV. Link the CV and LinkedIn.
   The CV link points to `/cv.pdf`; the PDF itself is added in M8.
   *Done when:* all text is in place.

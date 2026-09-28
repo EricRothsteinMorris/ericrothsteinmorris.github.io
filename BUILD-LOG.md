@@ -149,3 +149,6 @@ I decided.
   `static "cv.pdf" ← "<path to the PDF>"` entry to `site` in `Main.lean`:
   Verso then copies it to `_site/cv.pdf` on every generation. A PDF that
   is only committed, without that entry, isn't published.
+- The deploy run for the merge passed: build 3 min 48 s, deploy 10 s.
+  The live pages are identical to the local build, and `/cv.pdf` returns
+  404 until M8.
