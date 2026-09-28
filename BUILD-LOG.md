@@ -9,6 +9,8 @@ I decided.
 
 - M5: add "Built with Verso" to the footer, linking to Verso's license.
   Every page includes CSS and a script from Verso, which is Apache-2.0.
+- M5: add a footer line with the site's terms: Lean code Apache-2.0, text
+  all rights reserved. Decided in M3 instead of per-file license notices.
 
 ## 2026-09-28 — M1: template, toolchain and repository files
 
@@ -82,3 +84,27 @@ I decided.
   identical to the local build's.
 - A clean build takes about four minutes, so the decision not to cache
   `.lake/` stands.
+
+## 2026-09-28 — M3: pages, navigation and URLs
+
+- Verso's blog genre publishes each page at `/<name>/`, as declared with
+  `site` in `Main.lean`. A post's URL is
+  `<blog>/{year}-{month}-{day}-{slug}/`, with month and day not
+  zero-padded. `Config.postName` can change this, but `blogMain` builds its
+  configuration only from the command-line options `--output` and
+  `--drafts`, so changing it means writing our own `main`.
+- The default theme's navigation lists only top-level pages, by title. It
+  has no home link and can't hold external links. Its CSS is `private` in
+  Verso, so changing the navigation means copying the whole default
+  template.
+- Decisions: the front page is About, titled with my name. Research is one
+  page with Projects and Publications sections. The blog stays at `/blog/`,
+  titled "Blog". The template's sample post goes.
+- Navigation: my name (home link), Research, Blog, CV, LinkedIn. It is
+  built in M5 with the theme; until then the default theme shows only
+  Research and Blog.
+- `lake exe generate-blog` writes pages but never deletes old ones, so
+  pages removed from the site stay in `_site/` and in the local preview.
+  Run `rm -rf _site` before generating to check the output exactly. The
+  deploy workflow builds from a clean checkout, so the live site is
+  unaffected.
