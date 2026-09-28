@@ -1,4 +1,4 @@
 import VersoBlog
-import Blog.FrontPage
-import Blog.Posts
 import Blog.About
+import Blog.Research
+import Blog.Posts

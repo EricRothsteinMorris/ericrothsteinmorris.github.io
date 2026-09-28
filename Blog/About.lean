@@ -1,8 +1,8 @@
 import VersoBlog
 open Verso Genre Blog
 
-#doc (Page) "About" =>
+-- The site's root page (see Main.lean). Its title is the browser tab's title
+-- and the page's heading. The text comes in M4.
+#doc (Page) "Eric Rothstein Morris" =>
 %%%
 %%%
-
-This is my blog, built with Verso.
