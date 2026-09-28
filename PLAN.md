@@ -22,47 +22,54 @@ instructions, shared settings, and checks that run on every change.
 - Publish the English CV only.
 - Keep the `DhMitm` repository private for now.
 - Start from the `basic-blog` template (verso-templates v4.34.0).
+- Deploy the unchanged template as a working prototype (M2) before
+  writing content.
 
 ## Milestones
 
 - [x] **M0. Retire the old site.** Copy the blog post, the About text and
   the avatar into the new project folder. Delete the old GitHub repository,
   which takes the old site offline, and then the old local folder. Don't
-  share the CV until M7, because it links to the website.
+  share the CV until M8, because it links to the website.
   *Done when:* the old site no longer loads.
 - [ ] **M1. New repository and co-development setup.** In a new local
   folder, set up the official Verso blog template, pinned to v4.34.0. Add
   `README.md`, `LICENSE`, `.gitignore`, `CLAUDE.md` (project rules for
   Claude), `.claude/settings.json` (shared permissions), this plan, and a
-  build log. Create the public GitHub repository and set its Pages source
-  to "GitHub Actions" before the first push, so nothing half-built gets
-  published.
+  build log. Create the public GitHub repository, push to it, and record
+  what GitHub Pages does before any deploy workflow exists.
   *Done when:* the repository is on GitHub and the template builds locally.
-- [ ] **M2. Structure.** Decide the pages, navigation and URLs. Also decide
+- [ ] **M2. Working prototype.** Deploy the template site unchanged to
+  GitHub Pages. A GitHub Actions workflow runs `lake build` and
+  `lake exe generate-blog` and deploys `_site/` on every push to `main`.
+  This shows what fails on GitHub before any content exists.
+  *Done when:* the template site loads at
+  https://ericrothsteinmorris.github.io.
+- [ ] **M3. Structure.** Decide the pages, navigation and URLs. Also decide
   whether Lean files carry the per-file license notice from the appendix of
   `LICENSE`. Posts mix Apache-licensed code with reserved prose, so a notice
   at the top of a post would misstate what it covers.
   *Done when:* all pages exist (empty) and the site builds.
-- [ ] **M3. Content.** Write About and Research (projects, plus publications
+- [ ] **M4. Content.** Write About and Research (projects, plus publications
   with DOI links), reusing the old About text. Link the CV and LinkedIn.
   *Done when:* all text is in place.
-- [ ] **M4. Design.** Theme and CSS.
+- [ ] **M5. Design.** Theme and CSS.
   *Done when:* the site looks finished on desktop and phone.
-- [ ] **M5. First Lean post.** Port "On Generalising Algorithms", with the
+- [ ] **M6. First Lean post.** Port "On Generalising Algorithms", with the
   definitions and `#eval` examples written in Lean.
   *Done when:* the post builds and its Lean code type-checks.
-- [ ] **M6. CI and deployment.** Add a GitHub Actions workflow that builds
-  the site on every pull request and deploys `main` to GitHub Pages. Add a
-  check that fails when personal data is committed.
-  *Done when:* a merged change deploys automatically.
-- [ ] **M7. Launch.** I review the site, check it live, and submit the
+- [ ] **M7. CI checks.** Extend the M2 workflow to build the site on every
+  pull request. Add a check that fails when personal data is committed.
+  *Done when:* a pull request that breaks the build or commits personal
+  data fails its checks.
+- [ ] **M8. Launch.** I review the site, check it live, and submit the
   application with the site's URL.
   *Done when:* the site is live and the application is sent.
 
 ## After launch
 
 - Prove in Lean that compression preserves the causal function's value
-  (follow-up post to M5).
+  (follow-up post to M6).
 - Translate the remaining math into Lean.
 - Turn the build log into Verso tutorial posts.
 - Make `DhMitm` public when it is ready.
@@ -76,7 +83,7 @@ instructions, shared settings, and checks that run on every change.
 - Build command: `lake exe generate-blog`. Output: `_site/`.
 - Example build workflow:
   [leanprover/verso-website `ci.yml`](https://github.com/leanprover/verso-website/blob/main/.github/workflows/ci.yml).
-  It deploys to Netlify; M6 adapts it for GitHub Pages.
+  It deploys to Netlify; M2 adapts it for GitHub Pages.
 - Local toolchain: Lean 4.34.1 through elan. The template pins its own
   version in `lean-toolchain`, and elan installs it automatically.
 - Claude Code settings: `.claude/settings.json` is shared and committed;

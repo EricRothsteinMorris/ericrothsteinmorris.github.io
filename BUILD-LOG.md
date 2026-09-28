@@ -7,7 +7,7 @@ I decided.
 
 ## To do
 
-- M4: add "Built with Verso" to the footer, linking to Verso's license.
+- M5: add "Built with Verso" to the footer, linking to Verso's license.
   Every page includes CSS and a script from Verso, which is Apache-2.0.
 
 ## 2026-09-28 — M1: template, toolchain and repository files
@@ -30,7 +30,7 @@ I decided.
 
 ## 2026-09-28 — M1: git repository
 
-- Initialised the repository with `git init -b main`, because M6 deploys
+- Initialised the repository with `git init -b main`, because M2 deploys
   `main`.
 - Set git's name and email globally in Ubuntu (`~/.gitconfig`). The email
   is my GitHub noreply address, so commits don't publish a private one.
@@ -41,3 +41,15 @@ I decided.
   (`core.filemode = true`) would commit them as executable. Fix: `chmod 644`
   on the files git would add, leaving directories at 755. `.lake/` keeps
   its modes, because the programs Lake builds need the executable bit.
+
+## 2026-09-28 — Plan: a working prototype first
+
+- Added M2, "Working prototype": deploy the unchanged template to GitHub
+  Pages now, to find out what fails on GitHub before any content exists.
+  The old M2–M7 became M3–M8. M7 (formerly M6) keeps only the
+  pull-request build and the personal-data check.
+
+## 2026-09-28 — M1: GitHub repository and Pages source
+
+- Created the public repository with `gh repo create <name> --public`.
+  Without `--add-readme`, `--gitignore` or `--license`, it starts empty.

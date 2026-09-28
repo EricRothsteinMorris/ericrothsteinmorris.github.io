@@ -20,7 +20,10 @@ unless I ask.
   and open http://localhost:8000.
 - Record problems, their causes, fixes and decisions in `BUILD-LOG.md` as
   they happen, under a dated entry. Put to-dos found along the way in its
-  To do section. The personal-data rule below applies to it.
+  To do section. The personal-data rule below applies to it. Keep
+  security-relevant details out of it too, such as how git or `gh`
+  authenticates, token scopes, where credentials are stored, and access
+  or permission rules.
 
 ## Versions
 
