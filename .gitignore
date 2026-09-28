@@ -1,0 +1,23 @@
+# Lake: build output and downloaded dependencies
+.lake/
+
+# Verso: generated site and intermediate output
+_site/
+_out/
+
+# Claude Code: personal files. Shared settings are in .claude/settings.json.
+.claude/settings.local.json
+CLAUDE.local.md
+.claude/worktrees/
+
+# Files the operating system creates on its own.
+# Zone.Identifier: Windows adds these when Explorer copies files into WSL.
+# Thumbs.db, desktop.ini: Windows Explorer can add these when showing a folder.
+.DS_Store
+*:Zone.Identifier
+Thumbs.db
+desktop.ini
+
+# Local-only material: old-site content until it's ported in M3 and M5,
+# other CV versions, application documents
+private/
