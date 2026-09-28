@@ -53,3 +53,23 @@ I decided.
 
 - Created the public repository with `gh repo create <name> --public`.
   Without `--add-readme`, `--gitignore` or `--license`, it starts empty.
+
+## 2026-09-28 — M2: deploy workflow
+
+- Added `.github/workflows/pages.yml`, adapted from leanprover/verso-website's
+  `ci.yml` (which deploys to Netlify) and GitHub's Pages starter workflow.
+  On every push to `main` it runs `lake build` and `lake exe generate-blog`
+  and deploys `_site/` with `actions/upload-pages-artifact` and
+  `actions/deploy-pages`.
+- Installed elan from its v4.2.4 release file, checked against a SHA-256 in
+  the workflow. The reference workflow uses v3.0.0 without a checksum.
+  Decided against `leanprover/lean-action`: v1.6.0 downloads `elan-init.sh`
+  from elan's `master` branch, so pinning the action doesn't pin elan.
+- Pinned every action by commit SHA, because a tag can be moved to other
+  code.
+- Runner: `ubuntu-24.04` rather than `ubuntu-latest`, so the image doesn't
+  change when `ubuntu-latest` moves on. It ships gcc, which MD4Lean needs.
+- Decided not to cache `.lake/` (506 MB locally). The site won't change
+  often, and a clean build shows what fails on a fresh machine.
+- `actions/upload-pages-artifact` v4 and later leaves out files and
+  directories whose names start with `.`.

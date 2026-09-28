@@ -1,0 +1,90 @@
+# Build the Verso site and deploy it to GitHub Pages on every push to main.
+#
+# Adapted from leanprover/verso-website's .github/workflows/ci.yml (which
+# deploys to Netlify) and GitHub's Pages starter workflow
+# (actions/starter-workflows, pages/static.yml).
+#
+# Third-party actions are pinned by full commit SHA, because a tag can be
+# moved to other code; the comment after each SHA names its release.
+
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+
+# Every job gets a read-only token unless it says otherwise; the deploy job
+# adds only what Pages needs.
+permissions:
+  contents: read
+
+# One deployment at a time. A running deploy is never cancelled, so the site
+# is not left half-published; runs queued behind it are skipped in favour of
+# the newest one.
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    # A fixed image, not ubuntu-latest, so the build doesn't change when
+    # GitHub moves ubuntu-latest to a newer release. The image ships gcc,
+    # which MD4Lean needs to compile md4c.
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Check out the repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      # Install elan from a pinned release file instead of piping
+      # elan-init.sh from elan's master branch, and check the file's SHA-256
+      # before running it. The hash matches the digest GitHub records for
+      # this release asset.
+      - name: Install elan
+        env:
+          ELAN_VERSION: v4.2.4
+          ELAN_SHA256: 42b94d4244e8353142c456ec0e4ca6528fd898a6c604d4059f494e706e431f63
+        run: |
+          set -euo pipefail
+          cd "$RUNNER_TEMP"
+          curl -sSfL -o elan.tar.gz \
+            "https://github.com/leanprover/elan/releases/download/${ELAN_VERSION}/elan-x86_64-unknown-linux-gnu.tar.gz"
+          echo "${ELAN_SHA256}  elan.tar.gz" | sha256sum -c -
+          tar xzf elan.tar.gz
+          # No default toolchain: elan installs the one named in
+          # lean-toolchain the first time lean or lake runs in the repository.
+          ./elan-init -y --default-toolchain none
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+
+      # Triggers the toolchain download, so it shows up in its own step in
+      # the log, separate from the build.
+      - name: Show the Lean version
+        run: lean --version
+
+      - name: Build
+        run: lake build
+
+      - name: Generate the site
+        run: lake exe generate-blog
+
+      - name: Upload the site for Pages
+        uses: actions/upload-pages-artifact@fc324d3547104276b827a68afc52ff2a11cc49c9 # v5.0.0
+        with:
+          path: _site
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-24.04
+    # Job-level permissions replace the workflow-level ones, so contents:
+    # read is repeated. This is the set in GitHub's custom Pages workflow
+    # docs; pages and id-token are the minimum they require.
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@368f82528645a54fb793d4d04e342629a3f51346 # v5.0.1

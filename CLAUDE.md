@@ -45,3 +45,13 @@ unless I ask.
   (see the License section of `README.md`).
 - Before adding third-party code, fonts or images, check their license and
   tell me what it is.
+
+## GitHub Pages limits
+
+The site is hosted on GitHub Pages. Keep it within
+[GitHub Pages limits](https://docs.github.com/en/pages/getting-started-with-github-pages/github-pages-limits)
+(checked 2026-09-28):
+
+- Content must follow the GitHub Terms of Service.
+- `actions/upload-pages-artifact` v4 and later leaves out files and
+  directories whose names start with `.`, so they never reach the site.
