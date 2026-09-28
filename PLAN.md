@@ -32,7 +32,7 @@ instructions, shared settings, and checks that run on every change.
   which takes the old site offline, and then the old local folder. Don't
   share the CV until M8, because it links to the website.
   *Done when:* the old site no longer loads.
-- [ ] **M1. New repository and co-development setup.** In a new local
+- [x] **M1. New repository and co-development setup.** In a new local
   folder, set up the official Verso blog template, pinned to v4.34.0. Add
   `README.md`, `LICENSE`, `.gitignore`, `CLAUDE.md` (project rules for
   Claude), `.claude/settings.json` (shared permissions), this plan, and a
