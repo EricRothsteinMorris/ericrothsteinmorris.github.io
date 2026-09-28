@@ -73,3 +73,12 @@ I decided.
   often, and a clean build shows what fails on a fresh machine.
 - `actions/upload-pages-artifact` v4 and later leaves out files and
   directories whose names start with `.`.
+
+## 2026-09-28 — M2: first deploy
+
+- The first run on `main` passed with no warnings. On a clean runner the
+  build job took 3 min 58 s, including the Lean toolchain download and
+  compiling Verso; the deploy job took 9 s. The deployed `index.html` is
+  identical to the local build's.
+- A clean build takes about four minutes, so the decision not to cache
+  `.lake/` stands.

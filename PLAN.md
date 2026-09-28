@@ -39,7 +39,7 @@ instructions, shared settings, and checks that run on every change.
   build log. Create the public GitHub repository, push to it, and record
   what GitHub Pages does before any deploy workflow exists.
   *Done when:* the repository is on GitHub and the template builds locally.
-- [ ] **M2. Working prototype.** Deploy the template site unchanged to
+- [x] **M2. Working prototype.** Deploy the template site unchanged to
   GitHub Pages. A GitHub Actions workflow runs `lake build` and
   `lake exe generate-blog` and deploys `_site/` on every push to `main`.
   This shows what fails on GitHub before any content exists.
