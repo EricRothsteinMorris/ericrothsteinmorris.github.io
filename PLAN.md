@@ -52,8 +52,9 @@ instructions, shared settings, and checks that run on every change.
   `LICENSE`. Posts mix Apache-licensed code with reserved prose, so a notice
   at the top of a post would misstate what it covers.
   *Done when:* all pages exist (empty) and the site builds.
-- [ ] **M4. Content.** Write About and Research (projects, plus publications
-  with DOI links), reusing the old About text. Link the CV and LinkedIn.
+- [ ] **M4. Content.** Write About and Research (publications with DOI
+  links), with the text taken from my CV. Link the CV and LinkedIn.
+  The CV link points to `/cv.pdf`; the PDF itself is added in M8.
   *Done when:* all text is in place.
 - [ ] **M5. Design.** Theme and CSS, including the navigation decided in
   M3: a home link, and links to the CV and LinkedIn.
@@ -65,9 +66,14 @@ instructions, shared settings, and checks that run on every change.
   pull request. Add a check that fails when personal data is committed.
   *Done when:* a pull request that breaks the build or commits personal
   data fails its checks.
-- [ ] **M8. Launch.** I review the site, check it live, and submit the
-  application with the site's URL.
+- [ ] **M8. Launch.** I add the CV PDF, review the site, check it live, and
+  submit the application with the site's URL.
   *Done when:* the site is live and the application is sent.
+- [ ] **M9. Tutorial post.** Finish "Building This Site with Verso and
+  GitHub Pages", whose introduction was published in M4. It documents how
+  this site was built, for people who do maths and want a Verso website on
+  GitHub.
+  *Done when:* the post covers each milestone and builds.
 
 ## After launch
 

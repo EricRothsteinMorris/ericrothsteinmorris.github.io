@@ -11,6 +11,16 @@ I decided.
   Every page includes CSS and a script from Verso, which is Apache-2.0.
 - M5: add a footer line with the site's terms: Lean code Apache-2.0, text
   all rights reserved. Decided in M3 instead of per-file license notices.
+- M5: home link. Verso's `topNav` takes an optional home link
+  (`topNav (homeLink := some "…")`, `VersoBlog/Theme.lean`), but the
+  default theme's `primary` template calls it without one. Our theme's
+  copy of `primary` passes it; the copy also needs the default CSS, which
+  is `private` in Verso.
+- M8: add the CV PDF and its `static` entry in `Main.lean` (see the M4
+  entry "content sources and publications").
+- Check whether `draft := true` hides a post from the /blog/ index.
+  Reading `Generate.lean` suggests that Verso skips the post's own page but
+  still lists it, linking to a page that doesn't exist.
 
 ## 2026-09-28 — M1: template, toolchain and repository files
 
@@ -111,3 +121,31 @@ I decided.
 - The deploy run for the merge passed: build 3 min 49 s, deploy 12 s.
   The live site serves the four pages, and the template's `/about/` and
   sample post return 404.
+
+## 2026-09-28 — M4: content sources and publications
+
+- A CV mock-up, kept in `private/`, is the single source for the content
+  of About, Research and the CV.
+- Added a tutorial post: after each milestone's work, a post documents how
+  the site was built, for people who do maths and want a Verso website on
+  GitHub. It starts on the M4 branch and may go live unfinished.
+- The CV lists publications without DOIs. Looked them up on Crossref by
+  title (`api.crossref.org/works?query.bibliographic=...`). Each top match
+  agreed on title, venue, year and co-authors, and each DOI resolves at
+  doi.org. Crossref answers HTTP 429 (too many requests) when queried
+  quickly; pausing 5 s between queries and waiting as its `Retry-After`
+  header asks fixed it.
+- Crossref's author records don't always match the CV: two of them store
+  "Rothstein" as a given name and "Morris" as the family name. Having two
+  last names complicates things. The site keeps the author names as the CV
+  writes them.
+- Decision after previewing: Research lists only publications. The
+  Projects section planned in M3 is dropped.
+- The tutorial post is titled "Building This Site with Verso and GitHub
+  Pages". M4 publishes only its introduction; the new milestone M9
+  finishes it.
+- The CV PDF is added at launch (M8), not in M4. About already links to
+  `cv.pdf`, which returns 404 until then. To publish the PDF, add a
+  `static "cv.pdf" ← "<path to the PDF>"` entry to `site` in `Main.lean`:
+  Verso then copies it to `_site/cv.pdf` on every generation. A PDF that
+  is only committed, without that entry, isn't published.
