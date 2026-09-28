@@ -108,3 +108,6 @@ I decided.
   Run `rm -rf _site` before generating to check the output exactly. The
   deploy workflow builds from a clean checkout, so the live site is
   unaffected.
+- The deploy run for the merge passed: build 3 min 49 s, deploy 12 s.
+  The live site serves the four pages, and the template's `/about/` and
+  sample post return 404.

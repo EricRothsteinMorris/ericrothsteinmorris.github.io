@@ -47,7 +47,7 @@ instructions, shared settings, and checks that run on every change.
   This shows what fails on GitHub before any content exists.
   *Done when:* the template site loads at
   https://ericrothsteinmorris.github.io.
-- [ ] **M3. Structure.** Decide the pages, navigation and URLs. Also decide
+- [x] **M3. Structure.** Decide the pages, navigation and URLs. Also decide
   whether Lean files carry the per-file license notice from the appendix of
   `LICENSE`. Posts mix Apache-licensed code with reserved prose, so a notice
   at the top of a post would misstate what it covers.
