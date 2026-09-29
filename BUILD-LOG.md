@@ -260,3 +260,8 @@ I decided.
   about 100 characters, beyond the usual 45–75, but there is more room
   for Lean code. `--max-width` is now `calc(47rem + 2 * var(--spacing))`,
   since the padding counts towards it. Phones are unchanged.
+- Phone check in Firefox's Responsive Design Mode (F12, then
+  Ctrl+Shift+M; Ctrl+Shift+R reloads the CSS) at 320 px, the narrowest
+  common phone width. The longest unbreakable words, a DOI on Research
+  (34 characters) and the email address on About (32), fit without a
+  horizontal scrollbar, so no `overflow-wrap` rule is needed.
