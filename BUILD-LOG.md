@@ -172,14 +172,40 @@ I decided.
   navigation has no GitHub or email link, and the line keeps all contact
   links in one place.
 - Moved the CSS out of `Blog/Theme.lean` into `static/style.css`, with
-  Verso's notice. A `static "static" ← "static"` entry in `Main.lean`
-  copies the folder to `_site/static/` on every generation, so a CSS edit
-  needs only `lake exe generate-blog`, not `lake build`. Verso's demo site
-  does the same. The other options were a Lean string (no CSS editor
-  support) and `Theme.cssFiles` with `include_str`.
+  Verso's notice. The CSS started as a Lean string only because Verso's
+  default theme keeps its CSS that way (`defaultBlogStyle`, `private`),
+  so copying `primary` meant copying the string too. Reasons for a
+  separate file:
+  - Edit loop. A Lean string is compiled into the `generate-blog`
+    executable, so every CSS edit needs `lake build` before
+    `lake exe generate-blog`. A `static "static" ← "static"` entry in
+    `Main.lean` instead copies the folder to `_site/static/` each time
+    the site is generated, so a CSS edit needs only
+    `lake exe generate-blog`.
+  - Editor support. Inside a `.lean` file the CSS is a raw string, so
+    the editor gives no CSS highlighting or checking. In a `.css` file
+    it does.
+  - One copy. An inline `<style>` repeats the whole CSS in every page's
+    HTML. A linked stylesheet is one file, which the browser can cache
+    and reuse across pages.
+  - Separation. `Blog/Theme.lean` holds the page structure (templates);
+    `static/style.css` holds the appearance.
+
+  Verso's demo site (`test-projects/website/DemoSiteMain.lean`) does the
+  same. The rejected alternative, `Theme.cssFiles` with `include_str`,
+  keeps a `.css` file but still compiles its contents into the
+  executable, so each edit still needs `lake build`. The cost of the
+  move: the `<link>` must come after `builtinHeader` (next bullet), and
+  README had to state the CSS's license, since a `.css` file isn't Lean
+  code.
 - Our stylesheet's `<link>` comes after `builtinHeader`, which inlines
   Verso's `--verso-*` variables (fonts, Lean code colours). Placed before
   it, as Verso's default theme places its CSS, our values for those
   variables would be overridden.
 - README's License section now covers CSS: Lean code and CSS are
   Apache-2.0, which also covers the part copied from Verso.
+- Verso's default theme declares `<meta name="color-scheme" content="light
+  dark">` but hard-codes a white background and black text, and
+  `verso-vars.css` has no dark values. Decision: light only for now
+  (`content="light"`); dark mode that follows the device setting is in
+  PLAN.md's "After launch", after M9.

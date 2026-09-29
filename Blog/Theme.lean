@@ -10,8 +10,8 @@ The site's theme: Verso's default theme with our own `primary` template.
 
 Changes from Verso's version: `primary` uses our navigation (`nav`) instead of
 `topNav`, the category list says "None yet." when there are no categories,
-and the CSS comes from `static/style.css` instead of Verso's private
-`defaultBlogStyle`.
+the CSS comes from `static/style.css` instead of Verso's private
+`defaultBlogStyle`, and the page declares the colour scheme "light" only.
 -/
 import VersoBlog
 
@@ -68,7 +68,10 @@ def primary : Template := do
       <head>
         <meta charset="utf-8"/>
         <meta name="viewport" content="width=device-width, initial-scale=1"/>
-        <meta name="color-scheme" content="light dark"/>
+        -- Light only. Verso's default says "light dark", which lets browsers
+        -- draw scrollbars and form controls dark on our white page. Dark mode
+        -- is planned for after M9 (PLAN.md, "After launch").
+        <meta name="color-scheme" content="light"/>
         <!-- Stop favicon requests -->
         <link rel="icon" href="data:," />
         <style>":root { --justify-important: left; }"</style>
