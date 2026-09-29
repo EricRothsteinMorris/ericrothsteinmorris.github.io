@@ -1,7 +1,7 @@
 /-
 The site's theme: Verso's default theme with our own `primary` template.
 
-`css` and `primary` are copied from Verso's `src/verso-blog/VersoBlog/Theme.lean`
+`primary` is copied from Verso's `src/verso-blog/VersoBlog/Theme.lean`
 (v4.34.0), which carries this notice:
 
   Copyright (c) 2023-2024 Lean FRO LLC. All rights reserved.
@@ -9,145 +9,15 @@ The site's theme: Verso's default theme with our own `primary` template.
   Author: David Thrane Christiansen
 
 Changes from Verso's version: `primary` uses our navigation (`nav`) instead of
-`topNav`, and the category list says "None yet." when there are no categories.
+`topNav`, the category list says "None yet." when there are no categories,
+and the CSS comes from `static/style.css` instead of Verso's private
+`defaultBlogStyle`.
 -/
 import VersoBlog
 
 open Verso Genre Blog Template Output Html
 
 namespace Blog
-
--- Verso's default CSS (`defaultBlogStyle`), unchanged. Verso declares it
--- `private`, so a theme with its own `primary` must bring its own copy.
-def css := r#"
-:root {
-  --max-width: 70ch;
-  --spacing: 1.5rem;
-  --color-accent: #0066cc;
-  --color-border: #ddd;
-}
-
-* {
-  box-sizing: border-box;
-}
-
-body {
-  font-family: var(--verso-text-font-family);
-  line-height: 1.6;
-  color: var(--verso-text-color);
-  background: #fff;
-  margin: 0;
-  padding: var(--spacing);
-  max-width: var(--max-width);
-  margin-inline: auto;
-}
-
-h1, h2, h3, h4, h5, h6 {
-  font-family: var(--verso-structure-font-family);
-  color: var(--verso-structure-color);
-  line-height: 1.2;
-  margin: 2em 0 0.5em;
-}
-
-h1 { font-size: 2rem; }
-h2 { font-size: 1.5rem; }
-h3 { font-size: 1.25rem; }
-
-p, ul, ol, pre {
-  margin: 0 0 1em;
-}
-
-a {
-  color: var(--color-accent);
-  text-decoration: none;
-}
-
-a:hover {
-  text-decoration: underline;
-}
-
-code {
-  font-family: var(--verso-code-font-family);
-  color: var(--verso-code-color);
-  background: #f4f4f4;
-  padding: 0.2em 0.4em;
-  border-radius: 3px;
-  font-size: 0.9em;
-}
-
-pre {
-  background: #f4f4f4;
-  padding: 1em;
-  border-radius: 5px;
-  overflow-x: auto;
-}
-
-pre code {
-  background: none;
-  padding: 0;
-}
-
-blockquote {
-  margin: 1em 0;
-  padding-left: 1em;
-  border-left: 3px solid var(--color-border);
-  color: #666;
-}
-
-img {
-  max-width: 100%;
-  height: auto;
-}
-
-table {
-  border-collapse: collapse;
-  width: 100%;
-  margin: 1em 0;
-}
-
-th, td {
-  text-align: left;
-  padding: 0.5em;
-  border-bottom: 1px solid var(--color-border);
-}
-
-th {
-  font-weight: 600;
-  font-family: var(--verso-structure-font-family);
-  color: var(--verso-structure-color);
-}
-
-nav.top {
-  margin-bottom: 2rem;
-  padding-bottom: 1rem;
-  border-bottom: 1px solid var(--color-border);
-}
-
-nav.top ol {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: flex;
-  gap: 1.5rem;
-  flex-wrap: wrap;
-}
-
-nav.top li {
-  margin: 0;
-}
-
-nav.top a {
-  font-family: var(--verso-structure-font-family);
-  color: var(--verso-structure-color);
-  text-decoration: none;
-  font-weight: 500;
-}
-
-nav.top a:hover {
-  color: var(--color-accent);
-  text-decoration: none;
-}
-"#
 
 -- The navigation decided in M3: my name (home link), Research, Blog, CV,
 -- LinkedIn. Verso's `topNav` builds the whole `<nav>` and can't take the
@@ -201,10 +71,14 @@ def primary : Template := do
         <meta name="color-scheme" content="light dark"/>
         <!-- Stop favicon requests -->
         <link rel="icon" href="data:," />
-        <style>{{css}}</style>
         <style>":root { --justify-important: left; }"</style>
         <title>{{← param (α := String) "title"}}</title>
         {{← builtinHeader}}
+        -- After `builtinHeader`, which inlines Verso's `--verso-*` variables,
+        -- so the values in our CSS win. `static/` is copied to the site by the
+        -- `static` entry in Main.lean; `<base href>` makes the path work from
+        -- every page.
+        <link rel="stylesheet" href="static/style.css"/>
       </head>
       <body>
         <header>

@@ -171,3 +171,15 @@ I decided.
 - About keeps its line of links (CV, LinkedIn, GitHub, email): the
   navigation has no GitHub or email link, and the line keeps all contact
   links in one place.
+- Moved the CSS out of `Blog/Theme.lean` into `static/style.css`, with
+  Verso's notice. A `static "static" ← "static"` entry in `Main.lean`
+  copies the folder to `_site/static/` on every generation, so a CSS edit
+  needs only `lake exe generate-blog`, not `lake build`. Verso's demo site
+  does the same. The other options were a Lean string (no CSS editor
+  support) and `Theme.cssFiles` with `include_str`.
+- Our stylesheet's `<link>` comes after `builtinHeader`, which inlines
+  Verso's `--verso-*` variables (fonts, Lean code colours). Placed before
+  it, as Verso's default theme places its CSS, our values for those
+  variables would be overridden.
+- README's License section now covers CSS: Lean code and CSS are
+  Apache-2.0, which also covers the part copied from Verso.

@@ -6,6 +6,8 @@ open Verso Genre Blog Site Syntax
 -- The root page is About, so the front page says who I am. Each subpage's
 -- URL is its string: /research/, /blog/.
 def blog : Site := site Blog.About /
+  -- Copies the folder static/ (the CSS) to /static/ on every generation.
+  static "static" ← "static"
   "research" Blog.Research
   -- A post's URL is /blog/{year}-{month}-{day}-{slug of its title}/, with
   -- month and day not zero-padded (Verso's `defaultPostName`).
