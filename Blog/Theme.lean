@@ -11,7 +11,8 @@ The site's theme: Verso's default theme with our own `primary` template.
 Changes from Verso's version: `primary` uses our navigation (`nav`) instead of
 `topNav`, the category list says "None yet." when there are no categories,
 the CSS comes from `static/style.css` instead of Verso's private
-`defaultBlogStyle`, and the page declares the colour scheme "light" only.
+`defaultBlogStyle`, the page declares the colour scheme "light" only, and
+the tab title ends in " — Eric Rothstein Morris".
 -/
 import VersoBlog
 
@@ -25,10 +26,13 @@ namespace Blog
 def nav : Template := do
   pure {{
     <nav class="top" role="navigation">
+      -- The name sits outside the list, so the CSS can place it on the left
+      -- and the list on the right, and move the list as a whole to its own
+      -- line when both don't fit (static/style.css, `nav.top`).
+      -- Every page has `<base href>` pointing at the site root, so "." is
+      -- the front page and "cv.pdf" is /cv.pdf from any page.
+      <a class="home" href=".">"Eric Rothstein Morris"</a>
       <ol>
-        -- Every page has `<base href>` pointing at the site root, so "." is
-        -- the front page and "cv.pdf" is /cv.pdf from any page.
-        <li class="home"><a href=".">"Eric Rothstein Morris"</a></li>
         -- Research and Blog: the top-level pages declared in Main.lean.
         {{ ← Theme.dirLinks (← read).site }}
         -- The PDF is added in M8; until then this link returns 404.
@@ -75,7 +79,9 @@ def primary : Template := do
         <!-- Stop favicon requests -->
         <link rel="icon" href="data:," />
         <style>":root { --justify-important: left; }"</style>
-        <title>{{← param (α := String) "title"}}</title>
+        -- The page's title plus my name, so browser tabs, bookmarks and search
+        -- results name the site; the page heading stays the title alone.
+        <title>{{← param (α := String) "title"}} " — Eric Rothstein Morris"</title>
         {{← builtinHeader}}
         -- After `builtinHeader`, which inlines Verso's `--verso-*` variables,
         -- so the values in our CSS win. `static/` is copied to the site by the

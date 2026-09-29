@@ -209,3 +209,13 @@ I decided.
   `verso-vars.css` has no dark values. Decision: light only for now
   (`content="light"`); dark mode that follows the device setting is in
   PLAN.md's "After launch", after M9.
+- Header layout: my name on the left in bold, the links on the right. The
+  name is a link outside the `<ol>`, and `nav.top` is a wrapping flex
+  row, so when both don't fit (on a phone) the list moves as a whole to
+  its own line under the name. With the name inside the list, items would
+  wrap one by one and could split the links across two lines.
+- About's title changed from my name (decided in M3) to "About", because
+  the navigation now shows my name directly above the page heading. So
+  that the front page's browser tab, bookmarks and search results still
+  name me, every tab title is now "<page title> — Eric Rothstein Morris",
+  set in `primary`. Page headings stay the title alone.

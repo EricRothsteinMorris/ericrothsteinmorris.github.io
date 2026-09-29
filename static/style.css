@@ -9,7 +9,8 @@ Copied from `defaultBlogStyle` in Verso's
   Released under Apache 2.0 license as described in the file LICENSE.
   Author: David Thrane Christiansen
 
-Unchanged so far.
+Changed by Eric Rothstein Morris: the navigation's layout (`nav.top` and
+`nav.top a.home`).
 */
 
 :root {
@@ -113,6 +114,20 @@ nav.top {
   margin-bottom: 2rem;
   padding-bottom: 1rem;
   border-bottom: 1px solid var(--color-border);
+  /* Changed: the name (a.home) on the left, the list of links on the right.
+     Wrapping moves the list as a whole to the next line when both don't fit,
+     so on a phone the name and the links each get a line. With one item on
+     a line, `space-between` puts it at the start. */
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 0.5rem 1.5rem;
+}
+
+/* Changed: the name stands out from the links. */
+nav.top a.home {
+  font-weight: 700;
 }
 
 nav.top ol {

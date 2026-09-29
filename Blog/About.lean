@@ -1,8 +1,10 @@
 import VersoBlog
 open Verso Genre Blog
 
--- The site's root page (see Main.lean). Its title is the browser tab's title
--- and the page's heading.
+-- The site's root page (see Main.lean). Its title is the page's heading and,
+-- followed by " — Eric Rothstein Morris", the browser tab's title. It is
+-- "About" rather than my name, because the navigation already shows my name
+-- directly above the heading.
 --
 -- The text is the Summary of my CV, word for word, so the site and the CV
 -- say the same thing. The CV, LinkedIn, GitHub and email links at the end
@@ -13,7 +15,7 @@ open Verso Genre Blog
 -- the site root, so it resolves to /cv.pdf from any page, both on GitHub
 -- Pages and in the local preview. The PDF is added at launch (M8), with a
 -- `static` entry in Main.lean; until then the link returns 404.
-#doc (Page) "Eric Rothstein Morris" =>
+#doc (Page) "About" =>
 %%%
 %%%
 
