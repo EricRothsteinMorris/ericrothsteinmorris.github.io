@@ -1,0 +1,237 @@
+/*
+The site's CSS. Blog/Theme.lean links it after Verso's own styles, so its
+values for Verso's `--verso-*` variables take effect.
+
+Copied from `defaultBlogStyle` in Verso's
+`src/verso-blog/VersoBlog/Theme.lean` (v4.34.0), which carries this notice:
+
+  Copyright (c) 2023-2024 Lean FRO LLC. All rights reserved.
+  Released under Apache 2.0 license as described in the file LICENSE.
+  Author: David Thrane Christiansen
+
+Changed by Eric Rothstein Morris: the text column's width (`--max-width`),
+the navigation's layout (`nav.top` and `nav.top a.home`), the gap above
+the page heading (`main h1:first-child`), the blog list and post metadata
+(`ul.post-list`, `.metadata`), and the footer (`body > footer`).
+*/
+
+:root {
+  /* Changed: a text column of 47rem (752 px at the default 16 px), as in the
+     Lean language reference, instead of Verso's 70ch (about 575 px of
+     text). `body` has `box-sizing: border-box`, so its max-width includes
+     the side padding, which is added here. Phones are narrower than this,
+     so it changes only wider screens. */
+  --max-width: calc(47rem + 2 * var(--spacing));
+  --spacing: 1.5rem;
+  --color-accent: #0066cc;
+  --color-border: #ddd;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--verso-text-font-family);
+  line-height: 1.6;
+  color: var(--verso-text-color);
+  background: #fff;
+  margin: 0;
+  padding: var(--spacing);
+  max-width: var(--max-width);
+  margin-inline: auto;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--verso-structure-font-family);
+  color: var(--verso-structure-color);
+  line-height: 1.2;
+  margin: 2em 0 0.5em;
+}
+
+h1 { font-size: 2rem; }
+h2 { font-size: 1.5rem; }
+h3 { font-size: 1.25rem; }
+
+/* Changed: the page heading sits 2rem below the header (the header's own
+   bottom margin) instead of 4rem. Its default top margin (2em at 2rem font
+   size) is larger than that margin, and the two margins collapse into the
+   larger one. Headings further down keep their spacing. */
+main h1:first-child {
+  margin-top: 0;
+}
+
+p, ul, ol, pre {
+  margin: 0 0 1em;
+}
+
+a {
+  color: var(--color-accent);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+code {
+  font-family: var(--verso-code-font-family);
+  color: var(--verso-code-color);
+  background: #f4f4f4;
+  padding: 0.2em 0.4em;
+  border-radius: 3px;
+  font-size: 0.9em;
+}
+
+pre {
+  background: #f4f4f4;
+  padding: 1em;
+  border-radius: 5px;
+  overflow-x: auto;
+}
+
+pre code {
+  background: none;
+  padding: 0;
+}
+
+blockquote {
+  margin: 1em 0;
+  padding-left: 1em;
+  border-left: 3px solid var(--color-border);
+  color: #666;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+  margin: 1em 0;
+}
+
+th, td {
+  text-align: left;
+  padding: 0.5em;
+  border-bottom: 1px solid var(--color-border);
+}
+
+th {
+  font-weight: 600;
+  font-family: var(--verso-structure-font-family);
+  color: var(--verso-structure-color);
+}
+
+nav.top {
+  margin-bottom: 2rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--color-border);
+  /* Changed: the name (a.home) on the left, the list of links on the right.
+     Wrapping moves the list as a whole to the next line when both don't fit,
+     so on a phone the name and the links each get a line. With one item on
+     a line, `space-between` puts it at the start. */
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 0.5rem 1.5rem;
+}
+
+/* Changed: the name stands out from the links. */
+nav.top a.home {
+  font-weight: 700;
+}
+
+nav.top ol {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+
+nav.top li {
+  margin: 0;
+}
+
+nav.top a {
+  font-family: var(--verso-structure-font-family);
+  color: var(--verso-structure-color);
+  text-decoration: none;
+  font-weight: 500;
+}
+
+nav.top a:hover {
+  color: var(--color-accent);
+  text-decoration: none;
+}
+
+/* Changed: the blog list. No bullets; space separates the entries. */
+ul.post-list {
+  list-style: none;
+  padding: 0;
+}
+
+ul.post-list > li {
+  margin-bottom: 2rem;
+}
+
+/* Changed: a post's title in the blog list is the entry's heading. */
+ul.post-list a.title {
+  font-family: var(--verso-structure-font-family);
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+
+/* Changed: the line under a post's title, in the blog list and on the
+   post's page: small and grey. Its parts (Verso's `.authors`, `.date` and,
+   once there are any, `ul.categories`) sit on one line. */
+.metadata {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 0.5rem;
+  margin: 0 0 1em;
+  font-size: 0.9rem;
+  color: #666;
+}
+
+/* Changed: the date comes first ("2026-09-28 · Eric Rothstein Morris").
+   Verso's templates put the authors first; `order` only changes where the
+   date is displayed, not the HTML. */
+.metadata .date {
+  order: -1;
+}
+
+/* Changed: a dot between the date and the author. The gap on each side
+   comes from `.metadata`'s gap and this margin. */
+.metadata .authors::before {
+  content: "·";
+  margin-right: 0.5rem;
+}
+
+.metadata ul.categories {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  gap: 0 0.75rem;
+}
+
+/* Changed: the footer (Blog/Theme.lean, `primary`): small and grey, with a
+   rule above it like the header's. `body > footer` matches only this
+   footer, not a `<footer>` inside a page's content. */
+body > footer {
+  margin-top: 3rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--color-border);
+  font-size: 0.85rem;
+  color: #666;
+}
+
+body > footer p {
+  margin: 0;
+}

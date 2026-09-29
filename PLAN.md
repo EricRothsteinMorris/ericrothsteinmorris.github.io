@@ -82,6 +82,10 @@ instructions, shared settings, and checks that run on every change.
 - Translate the remaining math into Lean.
 - Turn the build log into Verso tutorial posts.
 - Make `DhMitm` public when it is ready.
+- After M9: dark mode that follows the device setting. M5 made the site
+  light only. Dark mode needs dark values for the site's colours and for
+  Verso's `--verso-*` variables (Lean code, tooltips, proof states,
+  messages).
 
 ## Reference (checked 2026-09-28)
 
