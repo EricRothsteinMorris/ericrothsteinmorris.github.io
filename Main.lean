@@ -15,4 +15,5 @@ def blog : Site := site Blog.About /
     Blog.Posts.BuildingThisSite
     Blog.Posts.OnGeneralisingAlgorithms
 
-def main := blogMain .default blog
+-- The theme (Blog/Theme.lean) adds the navigation.
+def main := blogMain Blog.theme blog

@@ -5,8 +5,9 @@ open Verso Genre Blog
 -- and the page's heading.
 --
 -- The text is the Summary of my CV, word for word, so the site and the CV
--- say the same thing. Until the M5 theme adds them to the navigation, the
--- CV, LinkedIn, GitHub and email links sit at the end of the text.
+-- say the same thing. The CV, LinkedIn, GitHub and email links at the end
+-- keep all contact links in one place, even though the navigation
+-- (Blog/Theme.lean) also links the CV and LinkedIn.
 --
 -- `cv.pdf` is relative on purpose: every page has `<base href>` pointing at
 -- the site root, so it resolves to /cv.pdf from any page, both on GitHub

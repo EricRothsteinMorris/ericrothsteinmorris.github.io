@@ -11,11 +11,6 @@ I decided.
   Every page includes CSS and a script from Verso, which is Apache-2.0.
 - M5: add a footer line with the site's terms: Lean code Apache-2.0, text
   all rights reserved. Decided in M3 instead of per-file license notices.
-- M5: home link. Verso's `topNav` takes an optional home link
-  (`topNav (homeLink := some "…")`, `VersoBlog/Theme.lean`), but the
-  default theme's `primary` template calls it without one. Our theme's
-  copy of `primary` passes it; the copy also needs the default CSS, which
-  is `private` in Verso.
 - M8: add the CV PDF and its `static` entry in `Main.lean` (see the M4
   entry "content sources and publications").
 - Check whether `draft := true` hides a post from the /blog/ index.
@@ -152,3 +147,27 @@ I decided.
 - The deploy run for the merge passed: build 3 min 48 s, deploy 10 s.
   The live pages are identical to the local build, and `/cv.pdf` returns
   404 until M8.
+
+## 2026-09-29 — M5: theme and navigation
+
+- A Verso theme (`Theme` in `VersoBlog/Theme.lean`) has five templates:
+  `primary` (the whole HTML page), `page`, `post`, `archiveEntry` (one
+  entry in the blog index) and `category`. It also has `cssFiles`,
+  `jsFiles`, and `adHocTemplates` for giving one path its own template.
+  `{ Theme.default with primaryTemplate := … }` replaces only `primary`;
+  Verso's demo site (`test-projects/website/DemoSiteMain.lean`) does the
+  same.
+- Verso's `topNav` builds the whole `<nav>` and can't take external links,
+  but `Theme.dirLinks`, which lists the top-level pages, is public.
+  `Blog/Theme.lean` builds its own navigation from it: my name (home
+  link), Research, Blog, CV, LinkedIn. Every page has a `<base href>`
+  pointing at the site root, so `href="."` is the front page and
+  `cv.pdf` resolves to /cv.pdf from any page.
+- Verso's default CSS is `private`, so `Blog/Theme.lean` copies it along
+  with `primary`. The copy keeps Verso's copyright notice, as Apache-2.0
+  requires; Verso has no NOTICE file.
+- Verso's blog index shows a "Categories" heading over an empty list when
+  no post has a category. Our `primary` shows "None yet." instead.
+- About keeps its line of links (CV, LinkedIn, GitHub, email): the
+  navigation has no GitHub or email link, and the line keeps all contact
+  links in one place.
