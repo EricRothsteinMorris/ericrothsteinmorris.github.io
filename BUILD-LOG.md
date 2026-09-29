@@ -224,3 +224,10 @@ I decided.
   page heading was about 4rem: the heading's top margin (2em at 2rem font
   size) collapses with the header's 2rem bottom margin into the larger of
   the two. `main h1:first-child { margin-top: 0 }` cuts it to 2rem.
+- Blog list: no bullets, and more space between posts. Each title is bold
+  and a bit larger. The line under it ("2026-09-28 · Eric Rothstein
+  Morris") is small, grey and on one line, also on the post's own page.
+  Verso's templates put the author first; CSS `order` shows the date
+  first without changing the HTML. The date stays in ISO format
+  (2026-09-28), which reads the same in every country. This is CSS only;
+  the list still uses Verso's templates.

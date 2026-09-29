@@ -10,8 +10,8 @@ Copied from `defaultBlogStyle` in Verso's
   Author: David Thrane Christiansen
 
 Changed by Eric Rothstein Morris: the navigation's layout (`nav.top` and
-`nav.top a.home`) and the gap above the page heading
-(`main h1:first-child`).
+`nav.top a.home`), the gap above the page heading (`main h1:first-child`),
+and the blog list and post metadata (`ul.post-list`, `.metadata`).
 */
 
 :root {
@@ -162,4 +162,55 @@ nav.top a {
 nav.top a:hover {
   color: var(--color-accent);
   text-decoration: none;
+}
+
+/* Changed: the blog list. No bullets; space separates the entries. */
+ul.post-list {
+  list-style: none;
+  padding: 0;
+}
+
+ul.post-list > li {
+  margin-bottom: 2rem;
+}
+
+/* Changed: a post's title in the blog list is the entry's heading. */
+ul.post-list a.title {
+  font-family: var(--verso-structure-font-family);
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+
+/* Changed: the line under a post's title, in the blog list and on the
+   post's page: small and grey. Its parts (Verso's `.authors`, `.date` and,
+   once there are any, `ul.categories`) sit on one line. */
+.metadata {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 0.5rem;
+  margin: 0 0 1em;
+  font-size: 0.9rem;
+  color: #666;
+}
+
+/* Changed: the date comes first ("2026-09-28 · Eric Rothstein Morris").
+   Verso's templates put the authors first; `order` only changes where the
+   date is displayed, not the HTML. */
+.metadata .date {
+  order: -1;
+}
+
+/* Changed: a dot between the date and the author. The gap on each side
+   comes from `.metadata`'s gap and this margin. */
+.metadata .authors::before {
+  content: "·";
+  margin-right: 0.5rem;
+}
+
+.metadata ul.categories {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  gap: 0 0.75rem;
 }
