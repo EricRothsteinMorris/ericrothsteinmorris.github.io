@@ -11,6 +11,11 @@ I decided.
   Every page includes CSS and a script from Verso, which is Apache-2.0.
 - M5: add a footer line with the site's terms: Lean code Apache-2.0, text
   all rights reserved. Decided in M3 instead of per-file license notices.
+- M6: choose the code font, tested on the ported "On Generalising
+  Algorithms". The browser's default monospace font may lack some of
+  Lean's symbols (→, ℕ, ⟨⟩), which the browser then takes from another
+  font with different widths. A font stored in `static/` may be needed;
+  check its license first.
 - M8: add the CV PDF and its `static` entry in `Main.lean` (see the M4
   entry "content sources and publications").
 - Check whether `draft := true` hides a post from the /blog/ index.
@@ -231,3 +236,6 @@ I decided.
   first without changing the HTML. The date stays in ISO format
   (2026-09-28), which reads the same in every country. This is CSS only;
   the list still uses Verso's templates.
+- Fonts stay Verso's: the system's sans-serif for text and headings, and
+  the browser's monospace for code. There are no font files to download
+  or license. The code font is chosen in M6 (see To do).
