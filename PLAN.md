@@ -56,7 +56,7 @@ instructions, shared settings, and checks that run on every change.
   links), with the text taken from my CV. Link the CV and LinkedIn.
   The CV link points to `/cv.pdf`; the PDF itself is added in M8.
   *Done when:* all text is in place.
-- [ ] **M5. Design.** Theme and CSS, including the navigation decided in
+- [x] **M5. Design.** Theme and CSS, including the navigation decided in
   M3: a home link, and links to the CV and LinkedIn.
   *Done when:* the site looks finished on desktop and phone.
 - [ ] **M6. First Lean post.** Port "On Generalising Algorithms", with the

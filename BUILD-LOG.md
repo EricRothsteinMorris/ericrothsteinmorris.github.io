@@ -265,3 +265,6 @@ I decided.
   common phone width. The longest unbreakable words, a DOI on Research
   (34 characters) and the email address on About (32), fit without a
   horizontal scrollbar, so no `overflow-wrap` rule is needed.
+- The deploy run for the merge passed: build 3 min 45 s, deploy 10 s.
+  The live pages and `static/style.css` are identical to the local
+  build, and `/cv.pdf` returns 404 until M8.
