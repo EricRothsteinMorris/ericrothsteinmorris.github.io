@@ -219,3 +219,8 @@ I decided.
   that the front page's browser tab, bookmarks and search results still
   name me, every tab title is now "<page title> — Eric Rothstein Morris",
   set in `primary`. Page headings stay the title alone.
+- Width and spacing stay Verso's: a text column of at most 70 characters,
+  1.5rem side padding, line height 1.6. The gap between the header and the
+  page heading was about 4rem: the heading's top margin (2em at 2rem font
+  size) collapses with the header's 2rem bottom margin into the larger of
+  the two. `main h1:first-child { margin-top: 0 }` cuts it to 2rem.

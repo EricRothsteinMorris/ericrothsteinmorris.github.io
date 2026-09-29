@@ -10,7 +10,8 @@ Copied from `defaultBlogStyle` in Verso's
   Author: David Thrane Christiansen
 
 Changed by Eric Rothstein Morris: the navigation's layout (`nav.top` and
-`nav.top a.home`).
+`nav.top a.home`) and the gap above the page heading
+(`main h1:first-child`).
 */
 
 :root {
@@ -45,6 +46,14 @@ h1, h2, h3, h4, h5, h6 {
 h1 { font-size: 2rem; }
 h2 { font-size: 1.5rem; }
 h3 { font-size: 1.25rem; }
+
+/* Changed: the page heading sits 2rem below the header (the header's own
+   bottom margin) instead of 4rem. Its default top margin (2em at 2rem font
+   size) is larger than that margin, and the two margins collapse into the
+   larger one. Headings further down keep their spacing. */
+main h1:first-child {
+  margin-top: 0;
+}
 
 p, ul, ol, pre {
   margin: 0 0 1em;
