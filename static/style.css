@@ -9,14 +9,19 @@ Copied from `defaultBlogStyle` in Verso's
   Released under Apache 2.0 license as described in the file LICENSE.
   Author: David Thrane Christiansen
 
-Changed by Eric Rothstein Morris: the navigation's layout (`nav.top` and
-`nav.top a.home`), the gap above the page heading (`main h1:first-child`),
-the blog list and post metadata (`ul.post-list`, `.metadata`), and the
-footer (`body > footer`).
+Changed by Eric Rothstein Morris: the text column's width (`--max-width`),
+the navigation's layout (`nav.top` and `nav.top a.home`), the gap above
+the page heading (`main h1:first-child`), the blog list and post metadata
+(`ul.post-list`, `.metadata`), and the footer (`body > footer`).
 */
 
 :root {
-  --max-width: 70ch;
+  /* Changed: a text column of 47rem (752 px at the default 16 px), as in the
+     Lean language reference, instead of Verso's 70ch (about 575 px of
+     text). `body` has `box-sizing: border-box`, so its max-width includes
+     the side padding, which is added here. Phones are narrower than this,
+     so it changes only wider screens. */
+  --max-width: calc(47rem + 2 * var(--spacing));
   --spacing: 1.5rem;
   --color-accent: #0066cc;
   --color-border: #ddd;

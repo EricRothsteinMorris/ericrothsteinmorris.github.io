@@ -250,3 +250,13 @@ I decided.
   includes Verso's CSS and scripts, so crediting Verso and linking its
   license belongs on every page. README's License section stays the full
   statement of the terms.
+- On desktop the text column felt narrow: about 575 px, because Verso's
+  `max-width: 70ch` includes the side padding. First try: 18 px text on
+  wide screens, which makes the column grow with the text (it is in
+  `ch`) while lines keep about 75 characters. It made everything bigger,
+  but not wider in the way I wanted.
+- Decision: the text column of the Lean language reference, 47rem
+  (752 px) at 16 px text, measured from its `book.css`. Lines are longer,
+  about 100 characters, beyond the usual 45–75, but there is more room
+  for Lean code. `--max-width` is now `calc(47rem + 2 * var(--spacing))`,
+  since the padding counts towards it. Phones are unchanged.
