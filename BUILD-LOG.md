@@ -239,3 +239,9 @@ I decided.
 - Fonts stay Verso's: the system's sans-serif for text and headings, and
   the browser's monospace for code. There are no font files to download
   or license. The code font is chosen in M6 (see To do).
+- Colours stay Verso's: black text on white, blue links (`#0066cc`), and
+  grey (`#666`) for the date line under post titles and for quotes.
+  Against white they have contrast ratios of 21:1, 5.6:1 and 5.7:1, all
+  above the 4.5:1 that WCAG AA asks for normal text. Links in the text
+  aren't underlined until hovered, so only their colour sets them apart;
+  blue against black is 3.8:1, above the 3:1 WCAG asks for that case.
