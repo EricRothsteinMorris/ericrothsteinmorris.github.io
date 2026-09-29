@@ -11,8 +11,9 @@ The site's theme: Verso's default theme with our own `primary` template.
 Changes from Verso's version: `primary` uses our navigation (`nav`) instead of
 `topNav`, the category list says "None yet." when there are no categories,
 the CSS comes from `static/style.css` instead of Verso's private
-`defaultBlogStyle`, the page declares the colour scheme "light" only, and
-the tab title ends in " — Eric Rothstein Morris".
+`defaultBlogStyle`, the page declares the colour scheme "light" only, the
+tab title ends in " — Eric Rothstein Morris", and a footer gives the site's
+terms and credits Verso.
 -/
 import VersoBlog
 
@@ -98,6 +99,21 @@ def primary : Template := do
           {{postList}}
           {{catList}}
         </main>
+        -- The site's terms, decided in M3 instead of per-file license notices
+        -- (README's License section has the full statement), and credit to
+        -- Verso, whose Apache-2.0 CSS and scripts every page includes. The
+        -- Verso license link is pinned to the version in lakefile.toml.
+        <footer>
+          <p>
+            "© 2026 Eric Rothstein Morris. Lean code and CSS are licensed under the "
+            <a href="https://github.com/EricRothsteinMorris/ericrothsteinmorris.github.io/blob/main/LICENSE">"Apache License 2.0"</a>
+            "; everything else, including the text, is all rights reserved. Built with "
+            <a href="https://github.com/leanprover/verso">"Verso"</a>
+            " ("
+            <a href="https://github.com/leanprover/verso/blob/v4.34.0/LICENSE">"Apache License 2.0"</a>
+            ")."
+          </p>
+        </footer>
       </body>
     </html>
   }}

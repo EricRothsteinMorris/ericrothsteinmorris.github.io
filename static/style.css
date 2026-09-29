@@ -11,7 +11,8 @@ Copied from `defaultBlogStyle` in Verso's
 
 Changed by Eric Rothstein Morris: the navigation's layout (`nav.top` and
 `nav.top a.home`), the gap above the page heading (`main h1:first-child`),
-and the blog list and post metadata (`ul.post-list`, `.metadata`).
+the blog list and post metadata (`ul.post-list`, `.metadata`), and the
+footer (`body > footer`).
 */
 
 :root {
@@ -213,4 +214,19 @@ ul.post-list a.title {
   padding: 0;
   display: flex;
   gap: 0 0.75rem;
+}
+
+/* Changed: the footer (Blog/Theme.lean, `primary`): small and grey, with a
+   rule above it like the header's. `body > footer` matches only this
+   footer, not a `<footer>` inside a page's content. */
+body > footer {
+  margin-top: 3rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--color-border);
+  font-size: 0.85rem;
+  color: #666;
+}
+
+body > footer p {
+  margin: 0;
 }

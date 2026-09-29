@@ -7,10 +7,6 @@ I decided.
 
 ## To do
 
-- M5: add "Built with Verso" to the footer, linking to Verso's license.
-  Every page includes CSS and a script from Verso, which is Apache-2.0.
-- M5: add a footer line with the site's terms: Lean code Apache-2.0, text
-  all rights reserved. Decided in M3 instead of per-file license notices.
 - M6: choose the code font, tested on the ported "On Generalising
   Algorithms". The browser's default monospace font may lack some of
   Lean's symbols (→, ℕ, ⟨⟩), which the browser then takes from another
@@ -245,3 +241,12 @@ I decided.
   above the 4.5:1 that WCAG AA asks for normal text. Links in the text
   aren't underlined until hovered, so only their colour sets them apart;
   blue against black is 3.8:1, above the 3:1 WCAG asks for that case.
+- Footer on every page, small and grey under a rule: "© 2026 Eric
+  Rothstein Morris. Lean code and CSS are licensed under the Apache
+  License 2.0; everything else, including the text, is all rights
+  reserved. Built with Verso (Apache License 2.0)." The first license
+  link goes to this repository's `LICENSE`, the second to Verso's
+  `LICENSE` at v4.34.0, the version the site is built with. Every page
+  includes Verso's CSS and scripts, so crediting Verso and linking its
+  license belongs on every page. README's License section stays the full
+  statement of the terms.
