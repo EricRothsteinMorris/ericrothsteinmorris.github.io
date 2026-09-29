@@ -7,11 +7,6 @@ I decided.
 
 ## To do
 
-- M6: choose the code font, tested on the ported "On Generalising
-  Algorithms". The browser's default monospace font may lack some of
-  Lean's symbols (→, ℕ, ⟨⟩), which the browser then takes from another
-  font with different widths. A font stored in `static/` may be needed;
-  check its license first.
 - M8: add the CV PDF and its `static` entry in `Main.lean` (see the M4
   entry "content sources and publications").
 - Check whether `draft := true` hides a post from the /blog/ index.
@@ -268,3 +263,80 @@ I decided.
 - The deploy run for the merge passed: build 3 min 45 s, deploy 10 s.
   The live pages and `static/style.css` are identical to the local
   build, and `/cv.pdf` returns 404 until M8.
+
+## 2026-09-29 — M6: porting "On Generalising Algorithms" to Lean
+
+- Before porting, I ran the old post's Python code to check its
+  examples. It had errors, which the port fixes:
+  - The general version adds the dummy node's value to the prefix. With
+    sum that value is 0 and changes nothing. With median the code
+    crashes.
+  - The post claimed that compression keeps the causal function's
+    value. For median that's false: on `[-3, -3, -2, -1]` the code
+    stops with a KeyError. The claim needs a condition on the function.
+  - The trace left out the value on the empty prefix, which the
+    algorithm uses.
+- Decision: the post is all Lean, with no Python and no LaTeX. The
+  formulas became Lean definitions.
+- A post's Lean code goes in code blocks. A hidden `leanInit post` block
+  starts a Lean context. Each `lean post` block runs in it, in order,
+  and an error fails `lake build`.
+- In a `lean` block, `#eval` output shows only on hover. A `leanOutput`
+  block after it shows the output as text, and the build fails if the
+  text differs from Lean's. I tested this by changing `[3, 1]` to
+  `[3, 2]`: the build failed with "Didn't match".
+- Lean blocks can't import modules, so the post's file imports
+  `Std.Data.HashMap` itself.
+- `#eval` prints some values differently depending on the imports.
+  Without `import Lean`, a fraction prints as `(3 : Rat)/2`; with it,
+  as `3 / 2`. Posts import Lean through `VersoBlog`. So take expected
+  outputs from the post's own build, not from a separate test file.
+  `leanOutput` caught my mistake here.
+- `median []` is `none`, not `0`. With `0`, `[0]` would compress to
+  `[]`, because `median []` would equal `median [0]`.
+- A warning in a `lean` block doesn't fail the build. It shows in the
+  build output and as underlined code on the page. I tested this with
+  an unused variable.
+- The post now proves that compression keeps the value of every right
+  congruent causal function: if `f x = f y`, then
+  `f (x ++ [a]) = f (y ++ [a])`. It also proves that the result is a
+  sublist, that `sum` is right congruent and that `median` isn't. This
+  is the proof that PLAN.md's "After launch" planned as a follow-up
+  post.
+- The name is `RightCongruent`, not `Congruent`. Plain "congruent"
+  suggests lists extended on both sides, which is more than the proof
+  needs.
+- `decide +kernel` got stuck evaluating `List.mergeSort` inside a
+  proof. `median` sorts by insertion instead, and then
+  `decide +kernel` proves that `median` isn't right congruent.
+- The first Lean version of the LeetCode solution took O(n²) time. On a
+  Lean list, `s.take p` and `s[q]` walk from the start. Decision: the
+  solution copies the list into an array and computes the running sums
+  with `List.scanl`. Timed with `#eval` for n = 2000, 4000 and 8000:
+  the list version took 73, 260 and 922 ms, the array version 4, 9 and
+  17 ms.
+- To time pure code with `#eval`, wrap it in `IO.lazyPure`. Without it,
+  every run took 0 ms: the computation wasn't evaluated between the
+  two clock readings.
+- `compress` stays on lists. It calls `f` on each of the n + 1
+  prefixes, and for `sum` that alone takes about n²/2 steps, so arrays
+  wouldn't make it linear. The post explains this.
+- Code font: no change. Verso's `verso-vars.css` sets the code font to
+  `monospace`, and Verso ships no font files. So each browser uses its
+  own default monospace font.
+- Checked in Firefox on Windows (Inspector, Fonts tab): the code uses
+  Consolas. Reading each font's character table showed that Consolas
+  lacks `∀`, `∅` and `↦`. Windows takes them from Segoe UI Symbol. They
+  look fine, and no code lines up in columns after them.
+- Not checked: the default fonts on other systems. Responsive Design
+  Mode keeps the desktop's fonts, so only a real phone can show a
+  phone's.
+- At 320 px, long code lines stuck out of the column and the whole page
+  scrolled sideways. Verso sets `white-space: pre` on Lean code, so its
+  lines never wrap, and gives Lean blocks no scroll rule. Our `pre` rule
+  doesn't apply: Lean blocks are `<code>` elements, while the output
+  boxes are `<pre>`. Fix: `.hl.lean.block { overflow-x: auto; }` in
+  `static/style.css`, so each code block scrolls on its own.
+- Decision: code lines don't wrap, because wrapped code is hard to read.
+  They are at most 80 characters, so they fit the 47rem column on
+  desktop without scrolling.

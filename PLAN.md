@@ -77,8 +77,9 @@ instructions, shared settings, and checks that run on every change.
 
 ## After launch
 
-- Prove in Lean that compression preserves the causal function's value
-  (follow-up post to M6).
+- Done in M6: prove in Lean that compression preserves the causal
+  function's value. The proof is in the M6 post itself, not a follow-up
+  post.
 - Translate the remaining math into Lean.
 - Turn the build log into Verso tutorial posts.
 - Make `DhMitm` public when it is ready.

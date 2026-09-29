@@ -12,7 +12,8 @@ Copied from `defaultBlogStyle` in Verso's
 Changed by Eric Rothstein Morris: the text column's width (`--max-width`),
 the navigation's layout (`nav.top` and `nav.top a.home`), the gap above
 the page heading (`main h1:first-child`), the blog list and post metadata
-(`ul.post-list`, `.metadata`), and the footer (`body > footer`).
+(`ul.post-list`, `.metadata`), the footer (`body > footer`), and Lean code
+blocks (`.hl.lean.block`).
 */
 
 :root {
@@ -93,6 +94,14 @@ pre {
 pre code {
   background: none;
   padding: 0;
+}
+
+/* Changed: a Lean code block scrolls sideways when a line is wider than the
+   column, as `pre` blocks do. Verso sets `white-space: pre` on Lean code, so
+   its lines never wrap; without this rule, a long line sticks out of the
+   column and, on a phone, the whole page scrolls sideways. */
+.hl.lean.block {
+  overflow-x: auto;
 }
 
 blockquote {
