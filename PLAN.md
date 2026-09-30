@@ -59,9 +59,16 @@ instructions, shared settings, and checks that run on every change.
 - [x] **M5. Design.** Theme and CSS, including the navigation decided in
   M3: a home link, and links to the CV and LinkedIn.
   *Done when:* the site looks finished on desktop and phone.
-- [ ] **M6. First Lean post.** Port "On Generalising Algorithms", with the
-  definitions and `#eval` examples written in Lean.
+- [ ] **M6. First Lean post.** "A Vericoding Exercise": LeetCode 1171 with
+  a specification, a solution and a proof in Lean. It began as a port of
+  "On Generalising Algorithms"; the generalisation was cut and may become
+  a later post.
   *Done when:* the post builds and its Lean code type-checks.
+  Goals:
+  - [x] Port the post to Lean (commit 5227765).
+  - [x] Rewrite it as a vericoding exercise: specification, solution,
+    proof.
+  - [ ] New title and date, final check, merge.
 - [ ] **M7. CI checks.** Extend the M2 workflow to build the site on every
   pull request. Add a check that fails when personal data is committed.
   *Done when:* a pull request that breaks the build or commits personal
@@ -77,8 +84,9 @@ instructions, shared settings, and checks that run on every change.
 
 ## After launch
 
-- Prove in Lean that compression preserves the causal function's value
-  (follow-up post to M6).
+- Done in M6: prove in Lean that compression preserves the causal
+  function's value. The proof is in the M6 post itself, not a follow-up
+  post.
 - Translate the remaining math into Lean.
 - Turn the build log into Verso tutorial posts.
 - Make `DhMitm` public when it is ready.

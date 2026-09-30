@@ -10,6 +10,9 @@ _out/
 CLAUDE.local.md
 .claude/worktrees/
 
+# Working notes: the current goal and its plan, kept only locally
+/Current-Goal.md
+
 # Files the operating system creates on its own.
 # Zone.Identifier: Windows adds these when Explorer copies files into WSL.
 # Thumbs.db, desktop.ini: Windows Explorer can add these when showing a folder.
