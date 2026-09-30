@@ -75,9 +75,8 @@ instructions, shared settings, and checks that run on every change.
   *Done when:* a pull request that breaks the build or commits personal
   data fails its checks and can't be merged.
   Goals:
-  - [ ] Build the site on every pull request, without deploying, and
-    block merges when the build fails. Test with a throwaway pull
-    request that breaks the build.
+  - [x] Build the site on every pull request, without deploying, and
+    block merges when the build fails.
   - [ ] Write the personal-data check and test it locally, on made-up
     data.
   - [ ] Run the check on every pull request, and block merges when it
