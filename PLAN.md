@@ -59,7 +59,7 @@ instructions, shared settings, and checks that run on every change.
 - [x] **M5. Design.** Theme and CSS, including the navigation decided in
   M3: a home link, and links to the CV and LinkedIn.
   *Done when:* the site looks finished on desktop and phone.
-- [ ] **M6. First Lean post.** "A Vericoding Exercise": LeetCode 1171 with
+- [x] **M6. First Lean post.** "A Vericoding Exercise": LeetCode 1171 with
   a specification, a solution and a proof in Lean. It began as a port of
   "On Generalising Algorithms"; the generalisation was cut and may become
   a later post.
@@ -68,7 +68,7 @@ instructions, shared settings, and checks that run on every change.
   - [x] Port the post to Lean (commit 5227765).
   - [x] Rewrite it as a vericoding exercise: specification, solution,
     proof.
-  - [ ] New title and date, final check, merge.
+  - [x] New title and date, final check, merge.
 - [ ] **M7. CI checks.** Extend the M2 workflow to build the site on every
   pull request. Add a check that fails when personal data is committed.
   *Done when:* a pull request that breaks the build or commits personal
