@@ -1,4 +1,5 @@
-# Build the Verso site and deploy it to GitHub Pages on every push to main.
+# Build the Verso site on every push to main and on every pull request into
+# main. Deploy it to GitHub Pages only on pushes to main.
 #
 # Adapted from leanprover/verso-website's .github/workflows/ci.yml (which
 # deploys to Netlify) and GitHub's Pages starter workflow
@@ -7,10 +8,12 @@
 # Third-party actions are pinned by full commit SHA, because a tag can be
 # moved to other code; the comment after each SHA names its release.
 
-name: Deploy to GitHub Pages
+name: Build and deploy
 
 on:
   push:
+    branches: [main]
+  pull_request:
     branches: [main]
 
 # Every job gets a read-only token unless it says otherwise; the deploy job
@@ -18,11 +21,13 @@ on:
 permissions:
   contents: read
 
-# One deployment at a time. A running deploy is never cancelled, so the site
-# is not left half-published; runs queued behind it are skipped in favour of
-# the newest one.
+# One run at a time per ref: refs/heads/main for pushes, so one deployment
+# at a time, and refs/pull/<number>/merge for each pull request, so a pull
+# request never cancels a waiting deploy. A running deploy is never
+# cancelled, so the site is not left half-published; runs queued behind it
+# are skipped in favour of the newest one.
 concurrency:
-  group: pages
+  group: pages-${{ github.ref }}
   cancel-in-progress: false
 
 jobs:
@@ -73,6 +78,8 @@ jobs:
 
   deploy:
     needs: build
+    # Pull requests only build; only a push to main deploys.
+    if: github.event_name == 'push'
     runs-on: ubuntu-24.04
     # Job-level permissions replace the workflow-level ones, so contents:
     # read is repeated. This is the set in GitHub's custom Pages workflow
