@@ -13,7 +13,6 @@
       "Bash(lake update *)"
     ],
     "deny": [
-      "Edit(/private/**)",
       "Edit(/.lake/**)"
     ]
   }

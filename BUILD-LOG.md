@@ -9,6 +9,10 @@ I decided.
 
 - M8: add the CV PDF and its `static` entry in `Main.lean` (see the M4
   entry "content sources and publications").
+- Once the Lean style has settled, convert the comments in the other
+  Lean files to it (`.claude/rules/lean-style.md`): `Blog/Theme.lean`,
+  `Blog/About.lean`, `Blog/Research.lean`, `Main.lean`, `Blog/Posts.lean`
+  and `Blog/Posts/BuildingThisSite.lean`.
 - Check whether `draft := true` hides a post from the /blog/ index.
   Reading `Generate.lean` suggests that Verso skips the post's own page but
   still lists it, linking to a page that doesn't exist.
@@ -266,8 +270,9 @@ I decided.
 
 ## 2026-09-29 — M6: porting "On Generalising Algorithms" to Lean
 
-- Before porting, I ran the old post's Python code to check its
-  examples. It had errors, which the port fixes:
+- Before porting, I checked the old post. Running its Python code
+  found the first two errors below, and reading its definition of the
+  trace found the third. The port fixes all three:
   - The general version adds the dummy node's value to the prefix. With
     sum that value is 0 and changes nothing. With median the code
     crashes.
@@ -340,3 +345,181 @@ I decided.
 - Decision: code lines don't wrap, because wrapped code is hard to read.
   They are at most 80 characters, so they fit the 47rem column on
   desktop without scrolling.
+- Started a Lean style file, `.claude/rules/lean-style.md`, while
+  reviewing the post. Claude Code loads every file in `.claude/rules/`
+  at the start of a session, so no import is needed. It lists what I
+  want and what I don't want. A copy for all my projects can go in
+  `~/.claude/rules/` later, once the style has settled.
+- Style decision: every comment is a block comment, `/- … -/`, and
+  `-/` ends the last line of text, also in comments of several lines.
+  The post follows it; the other Lean files will follow later.
+- Workflow decision: agreed plans are kept in `CLAUDE.local.md`
+  (gitignored), which Claude Code loads at the start of every session.
+  When a plan is done, it is replaced by a description of the project's
+  resulting state. This log keeps the history.
+- Decision: rewrite the post as the story of its port to Lean with
+  Claude Code: the naive 2024 generalisation, what went wrong, and what
+  Lean did. New title "Generalising Algorithms, Revisited with Lean and
+  AI", dated 2026. The URL changes with it; nothing links to the old
+  one, because the old site is gone and this one launches in M8.
+- Verso's `slugifyTitle` turns spaces into hyphens and drops other
+  punctuation, so the comma in the new title doesn't reach the URL.
+- A faithful Lean port of the 2024 code fails in three ways. Each
+  matches a real failure of the 2024 Python:
+  - The dummy node is a type error: it puts an output into a list of
+    inputs. The Python feeds that value into the prefix.
+  - The second pass's lookup needs a proof that the key exists. The
+    Python raises KeyError, for example on `[-2, -2, -1, 0]` with median.
+  - The recursion has no termination proof. The Python loops forever
+    on `[-2, 0, -1, -2]` with median.
+- `decide +kernel` got stuck on `compress`. A proof that uses only
+  Lean's standard axioms (checked with `#print axioms`) unfolds
+  `compress.go` with `rw`, once per call, then uses `simp` with
+  `decide := true` and finishes with `decide +kernel`. `native_decide`
+  also works, but adds an axiom that trusts the compiler.
+- Style decision: every signature puts the name alone on its first
+  line, then one binder per line, then the type on its own line,
+  starting with `:`. This holds for theorems too, and for signatures
+  without binders.
+
+## 2026-09-30 — M6: who found what
+
+- Decision: the post names Claude Code once, in the opening, and says
+  "we" after that. For each error, it says what found it and what Lean
+  does with it.
+- Running the 2024 code and reading the 2024 post found its five
+  errors. We searched for the endless loop only because Lean asked for
+  a termination proof. Lean caught two errors in our own port.
+- The proof that `[-3, -3, -2, -1]` compresses to `[-3, -1]` passes on
+  its own, but in the post's build it exceeds Lean's default heartbeat
+  limit of 200000 (250000 also fails; 300000 passes). Heartbeats count
+  memory allocations, not time, so the result doesn't depend on the
+  machine. Setting the limit on the theorem alone doesn't help.
+  Decision: `set_option maxHeartbeats 400000` at the top of the post,
+  not an axiom. The post's module now builds in about 22 s, not 11 s.
+- To link to a place in a post, `{label x}[text]` puts an anchor on the
+  text and `{ref x}[text]` links to it. A label can't go on a code
+  block, so it goes on the sentence before the block. The link works
+  despite `<base href>`: Verso writes it relative to the site root.
+- An `+error` block shows Lean code that must fail. Its errors don't
+  fail the build, and `leanOutput` blocks after it check each message
+  word for word. To get a long message's exact text, put `PLACEHOLDER`
+  in the `leanOutput` block and build: Verso's "Didn't match" error
+  lists Lean's actual messages.
+- `leanOutput … (summarize := true)` shows a message's first three
+  lines and folds the rest into a details box.
+
+## 2026-09-30 — Workflow: one goal at a time
+
+- The plan is worked through one goal at a time. The current goal, its
+  decisions and its open steps are kept in `Current-Goal.md`
+  (gitignored), so that a new session can recover the context. When a
+  goal is done, the next one replaces it; this log keeps the history.
+- This replaces the decision of 2026-09-29 to keep plans in
+  `CLAUDE.local.md` and to replace each finished plan with a
+  description of the project's state. CLAUDE files now hold only
+  instructions.
+- `PLAN.md` holds the milestones and their status. Each milestone is
+  split into goals of about one session, and `PLAN.md` marks each goal
+  when it is done.
+
+## 2026-09-30 — M6: order of the rewritten post
+
+- A Lean block sees only the definitions of earlier blocks. The median
+  table and the counterexample theorems use the working `compress`, so
+  they come after it, in the section on what Lean made us do. The 2024
+  section keeps `median` and its traces, which don't need `compress`.
+- Rejected: the 2024 table as plain text. The build wouldn't check it.
+- Moved the working `compress`, its `sum` example and the median table
+  after the median traces. The build passed.
+
+## 2026-09-30 — M6: change of direction
+
+- Decision: stop rewriting the post as the story of its port. It cost
+  too much time. The 2024 examples used the median, which has no value
+  on the empty list, so it is a poor causal function to start from.
+- New content: the functions other than `sum` for which the LeetCode
+  solution works. Proved in Lean: if `f` is right congruent,
+  prefix-stable (`f w = f [] → f (x ++ w) = f x`) and cancellative
+  (`f (x ++ w) = f x → f w = f []`), then `compress f` keeps `f`'s
+  value, deletes only runs with `f w = f []`, and leaves none. `sum`
+  meets the conditions.
+- The conditions suffice. Whether they are necessary is not proved, and
+  the post won't claim it.
+- Core Lean has `Relation.TransGen` but no reflexive-transitive closure,
+  so the proof defines its own relation for "deletes runs one at a
+  time".
+
+## 2026-09-30 — M6: the LeetCode solution on lists, with a proof
+
+- Decision: `removeZeroSumSublists` works on the list itself, with no
+  arrays. This replaces the decision of 2026-09-29 to copy the list
+  into an array. The first pass pairs each running sum with its
+  position (`List.zipIdx`). The second pass keeps the rest of the list
+  and jumps ahead with `List.drop`. Positions only grow, so each element
+  is skipped at most once. Timed with `#eval` up to n = 32000, the
+  running time stays linear.
+- The post proves `removeZeroSumSublists s = compress sum s`, so what it
+  proves about `compress` also holds for the LeetCode solution.
+- Lean can't see on its own that the second pass ends. With the proof
+  in `decreasing_by`, Lean warns that `h` is unused, although the proof
+  uses it. A `have` in the body of `go` gives the proof without the
+  warning.
+
+## 2026-09-30 — M6: the specification first
+
+- Decision: the post states LeetCode's specification in Lean before the
+  code. In vericoding, code is written from a formal specification
+  (Bursuc et al., 2025, arXiv:2509.22908). A function solves the
+  problem if, for every input `s`, its output `t` has the sum of `s`,
+  results from `s` by deleting runs that sum to zero, and has no run
+  other than `[]` that sums to zero.
+- Conditions on sums alone are too weak, because they don't tie the
+  output's elements to the input's. The function that returns
+  `[s.sum]`, or `[]` when the sum is zero, keeps the sum and leaves no
+  zero-sum run, but turns `[1, 2]` into `[3]`. Requiring that every
+  prefix of the output has the sum of some prefix of the input doesn't
+  help: the whole output is a prefix too. Checked by computation.
+- One deletion is too few: `[1, -1, 5, 2, -2]` needs two. And the
+  output must have no zero-sum run of its own: deleting `[2, -2]` from
+  `[1, 2, -2, -1]` leaves `[1, -1]`.
+- The deletion relation is an inductive type that reads the input from
+  the left, like core Lean's `List.Sublist`: each element is kept, or
+  starts a run that sums to zero and is deleted. Rejected: a relation
+  that deletes a run and starts again on the result, which describes a
+  process; and a list of kept and deleted pieces joined with `flatten`,
+  which is hard to read.
+
+## 2026-09-30 — M6: proof that the solution meets the specification
+
+- The post proves that `removeZeroSumSublists` meets the
+  specification, directly after the function. The proof follows the
+  two passes: the first pass maps each prefix sum to the last position
+  with that sum; each jump skips a run that sums to zero; and the
+  output's running sums are all different, so no run of the output sums
+  to zero.
+- The proof in one code block exceeded Lean's default heartbeat limit.
+  With one block per theorem, and one long theorem split in two, it
+  builds without raising the limit. The limit applies to a whole code
+  block, not to each theorem in it.
+- The post's module now builds in about 40 s, instead of 14 s.
+
+## 2026-09-30 — M6: a simpler solution, and a new post
+
+- Decision: a simpler solution replaces the two-pass one. If a nonempty
+  prefix sums to zero, it deletes the shortest such prefix and goes on;
+  otherwise it keeps the first element. Its proof has about 100 lines,
+  against about 300. It takes O(n²) time in the worst case, against
+  O(n). In this post, simple code and proofs matter more than speed.
+- Lean's `List` is a linked list whose nodes can't be changed, while
+  LeetCode's can. The post says so and uses `List`.
+- Decision: the post becomes "A Vericoding Exercise": the specification,
+  the solution and its proof. The generalisation to causal functions is
+  cut and kept for a possible later post. This replaces M6's goal on
+  conditions for other functions.
+- The post's file is now `Blog/Posts/VericodingExercise.lean`. Its date,
+  2026-09-30, makes it the newest post, so it now comes first in
+  `Main.lean`, which sets the order of the blog index.
+- In Verso, `#` starts a section and `##` a subsection. A section holds
+  everything up to the next heading of the same or a higher level. A
+  `##` directly under the title fails with "Wrong header nesting".

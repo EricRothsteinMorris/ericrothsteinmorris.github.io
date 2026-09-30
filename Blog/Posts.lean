@@ -1,6 +1,6 @@
 import VersoBlog
 import Blog.Posts.BuildingThisSite
-import Blog.Posts.OnGeneralisingAlgorithms
+import Blog.Posts.VericodingExercise
 
 open Verso Genre Blog
 

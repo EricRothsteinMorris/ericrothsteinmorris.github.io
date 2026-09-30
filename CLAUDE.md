@@ -2,8 +2,7 @@
 
 This repository is the source of my personal website, written in Lean 4 with
 Verso's blog genre. It started from the `basic-blog` template
-(verso-templates v4.34.0). `PLAN.md` holds the milestones; don't edit it
-unless I ask.
+(verso-templates v4.34.0). `PLAN.md` holds the milestones.
 
 ## Build
 
@@ -24,6 +23,11 @@ unless I ask.
   security-relevant details out of it too, such as how git or `gh`
   authenticates, token scopes, where credentials are stored, and access
   or permission rules.
+
+## Lean style
+
+- Lean code follows `.claude/rules/lean-style.md`, which Claude Code
+  loads at the start of every session. Record new style decisions there.
 
 ## Versions
 

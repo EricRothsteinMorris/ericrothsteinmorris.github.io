@@ -14,8 +14,8 @@ def blog : Site := site Blog.About /
   -- The /blog/ index lists posts in this order, not by date, so the newest
   -- goes first.
   "blog" Blog.Posts with
+    Blog.Posts.VericodingExercise
     Blog.Posts.BuildingThisSite
-    Blog.Posts.OnGeneralisingAlgorithms
 
 -- The theme (Blog/Theme.lean) adds the navigation.
 def main := blogMain Blog.theme blog
