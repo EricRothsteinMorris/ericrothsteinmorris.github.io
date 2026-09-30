@@ -17,8 +17,6 @@ I develop it together with [Claude Code](https://claude.com/claude-code).
   (`Blog/Theme.lean`).
 - `static/`: the site's CSS, published at `/static/`.
 - `PLAN.md`: the plan for building this site.
-- `BUILD-LOG.md`: problems I ran into while building the site, and how I
-  solved them.
 
 ## License
 

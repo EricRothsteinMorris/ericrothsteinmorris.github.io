@@ -17,12 +17,10 @@ Verso's blog genre. It started from the `basic-blog` template
   is optional: it configures links into other Verso documents.
 - Preview with `python3 -m http.server 8000 --bind 127.0.0.1 --directory _site`
   and open http://localhost:8000.
-- Record problems, their causes, fixes and decisions in `BUILD-LOG.md` as
-  they happen, under a dated entry. Put to-dos found along the way in its
-  To do section. The personal-data rule below applies to it. Keep
-  security-relevant details out of it too, such as how git or `gh`
-  authenticates, token scopes, where credentials are stored, and access
-  or permission rules.
+- Record problems, their causes, fixes and decisions in
+  `private/BUILD-LOG.md` as they happen, under a dated entry. Put to-dos
+  found along the way in its To do section. Copy from it into tracked
+  files only what I approve.
 
 ## Lean style
 

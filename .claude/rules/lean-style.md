@@ -5,7 +5,7 @@ still changes: add each new decision here, with what I want and what I
 don't want.
 
 So far only `Blog/Posts/VericodingExercise.lean` follows it.
-Converting the other Lean files is on the To do list in `BUILD-LOG.md`;
+Converting the other Lean files is on the To do list in `private/BUILD-LOG.md`;
 don't convert them unless I ask.
 
 ## Lean code

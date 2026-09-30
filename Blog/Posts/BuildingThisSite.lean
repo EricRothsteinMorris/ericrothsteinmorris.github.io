@@ -19,4 +19,4 @@ This site is written in Lean 4 with [Verso](https://github.com/leanprover/verso)
 
 This post documents how I built it, milestone by milestone, as a practical guide for people who do mathematics and want a website like it. For now it is only this introduction; the sections follow as the site is finished.
 
-I built the site with Claude Code, Anthropic's coding assistant. The source, the plan and the build log are public in the [site's repository](https://github.com/EricRothsteinMorris/ericrothsteinmorris.github.io).
+I built the site with Claude Code, Anthropic's coding assistant. The source and the plan are public in the [site's repository](https://github.com/EricRothsteinMorris/ericrothsteinmorris.github.io).
