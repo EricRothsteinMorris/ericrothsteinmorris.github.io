@@ -88,7 +88,7 @@ instructions, shared settings, and checks that run on every change.
   function's value. The proof is in the M6 post itself, not a follow-up
   post.
 - Translate the remaining math into Lean.
-- Turn the build log into Verso tutorial posts.
+- Turn the private build notes into Verso tutorial posts.
 - Make `DhMitm` public when it is ready.
 - After M9: dark mode that follows the device setting. M5 made the site
   light only. Dark mode needs dark values for the site's colours and for

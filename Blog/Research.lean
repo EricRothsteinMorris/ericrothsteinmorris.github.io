@@ -6,8 +6,9 @@ open Verso Genre Blog
 --
 -- The text is copied word for word from my CV, in the CV's order, with its
 -- Markdown translated to Verso: `**bold**` becomes `*bold*` and `*italic*`
--- becomes `_italic_`. Author names are written as the CV writes them, which
--- for two papers differs from Crossref's records (see BUILD-LOG.md).
+-- becomes `_italic_`. Author names are written as the CV writes them. For
+-- two papers, Crossref's records differ: they give "Rothstein" as a given
+-- name and "Morris" as the family name.
 --
 -- Each publication ends with its DOI, shown as the link text so readers can
 -- see and copy it. In link text, `_` starts emphasis and must be escaped as
