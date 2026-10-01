@@ -83,7 +83,7 @@ instructions, shared settings, and checks that run on every change.
   Goals:
   - [x] Publish the CV at `/static/cv.pdf`, linked from About and the
     navigation.
-  - [ ] Review the live site on desktop and phone, and fix what the
+  - [x] Review the live site on desktop and phone, and fix what the
     review finds.
   - [ ] Send the application, and mark M8 as done.
 - [ ] **M9. Tutorial post.** Finish "Building This Site with Verso and
