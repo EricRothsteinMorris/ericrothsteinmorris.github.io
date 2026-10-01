@@ -54,7 +54,7 @@ instructions, shared settings, and checks that run on every change.
   *Done when:* all pages exist (empty) and the site builds.
 - [x] **M4. Content.** Write About and Research (publications with DOI
   links), with the text taken from my CV. Link the CV and LinkedIn.
-  The CV link points to `/cv.pdf`; the PDF itself is added in M8.
+  The CV link points to `/static/cv.pdf`; the PDF itself is added in M8.
   *Done when:* all text is in place.
 - [x] **M5. Design.** Theme and CSS, including the navigation decided in
   M3: a home link, and links to the CV and LinkedIn.
@@ -80,6 +80,12 @@ instructions, shared settings, and checks that run on every change.
 - [ ] **M8. Launch.** I add the CV PDF, review the site, check it live, and
   submit the application with the site's URL.
   *Done when:* the site is live and the application is sent.
+  Goals:
+  - [ ] Publish the CV at `/static/cv.pdf`, linked from About and the
+    navigation.
+  - [ ] Review the live site on desktop and phone, and fix what the
+    review finds.
+  - [ ] Send the application, and mark M8 as done.
 - [ ] **M9. Tutorial post.** Finish "Building This Site with Verso and
   GitHub Pages", whose introduction was published in M4. It documents how
   this site was built, for people who do maths and want a Verso website on
