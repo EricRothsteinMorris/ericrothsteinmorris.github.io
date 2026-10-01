@@ -69,19 +69,14 @@ instructions, shared settings, and checks that run on every change.
   - [x] Rewrite it as a vericoding exercise: specification, solution,
     proof.
   - [x] New title and date, final check, merge.
-- [ ] **M7. CI checks.** Extend the M2 workflow to build the site on every
-  pull request. Add a check that fails when personal data is committed.
-  Block merges into `main` when a check fails.
-  *Done when:* a pull request that breaks the build or commits personal
-  data fails its checks and can't be merged.
+- [x] **M7. CI checks.** Extend the M2 workflow to build the site on every
+  pull request, and block merges into `main` when the build fails. A
+  check for personal data was dropped: I review every pull request.
+  *Done when:* a pull request that breaks the build fails its check and
+  can't be merged.
   Goals:
   - [x] Build the site on every pull request, without deploying, and
     block merges when the build fails.
-  - [ ] Write the personal-data check and test it locally, on made-up
-    data.
-  - [ ] Run the check on every pull request, and block merges when it
-    fails. Test with a throwaway pull request that commits made-up
-    personal data.
 - [ ] **M8. Launch.** I add the CV PDF, review the site, check it live, and
   submit the application with the site's URL.
   *Done when:* the site is live and the application is sent.
