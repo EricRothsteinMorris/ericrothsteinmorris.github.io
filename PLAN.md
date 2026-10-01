@@ -81,7 +81,7 @@ instructions, shared settings, and checks that run on every change.
   submit the application with the site's URL.
   *Done when:* the site is live and the application is sent.
   Goals:
-  - [ ] Publish the CV at `/static/cv.pdf`, linked from About and the
+  - [x] Publish the CV at `/static/cv.pdf`, linked from About and the
     navigation.
   - [ ] Review the live site on desktop and phone, and fix what the
     review finds.
