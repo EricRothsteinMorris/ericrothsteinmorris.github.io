@@ -31,13 +31,13 @@ def nav : Template := do
       -- and the list on the right, and move the list as a whole to its own
       -- line when both don't fit (static/style.css, `nav.top`).
       -- Every page has `<base href>` pointing at the site root, so "." is
-      -- the front page and "cv.pdf" is /cv.pdf from any page.
+      -- the front page and "static/cv.pdf" is /static/cv.pdf from any page.
       <a class="home" href=".">"Eric Rothstein Morris"</a>
       <ol>
         -- Research and Blog: the top-level pages declared in Main.lean.
         {{ ← Theme.dirLinks (← read).site }}
-        -- The PDF is added in M8; until then this link returns 404.
-        <li><a href="cv.pdf">"CV"</a></li>
+        -- The CV, published from static/ by Main.lean's `static` entry.
+        <li><a href="static/cv.pdf">"CV"</a></li>
         -- The same URL as the link on About (Blog/About.lean).
         <li><a href="https://www.linkedin.com/in/dr-eric-rothstein-morris/">"LinkedIn"</a></li>
       </ol>
