@@ -77,15 +77,15 @@ instructions, shared settings, and checks that run on every change.
   Goals:
   - [x] Build the site on every pull request, without deploying, and
     block merges when the build fails.
-- [ ] **M8. Launch.** I add the CV PDF, review the site, check it live, and
+- [x] **M8. Launch.** I add the CV PDF, review the site, check it live, and
   submit the application with the site's URL.
   *Done when:* the site is live and the application is sent.
   Goals:
   - [x] Publish the CV at `/static/cv.pdf`, linked from About and the
     navigation.
-  - [ ] Review the live site on desktop and phone, and fix what the
+  - [x] Review the live site on desktop and phone, and fix what the
     review finds.
-  - [ ] Send the application, and mark M8 as done.
+  - [x] Send the application, and mark M8 as done.
 - [ ] **M9. Tutorial post.** Finish "Building This Site with Verso and
   GitHub Pages", whose introduction was published in M4. It documents how
   this site was built, for people who do maths and want a Verso website on
